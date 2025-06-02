@@ -1,26 +1,76 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-stsLight: #168991;
+  --color-stsDark: #0c3644;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes infinite-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.animate-infinite-scroll {
+  animation: infinite-scroll 30s linear infinite;
+}
+
+.group-hover\:paused:hover {
+  animation-play-state: paused;
+}
+
+
+@keyframes word {
+  0% {
+    transform: translateY(100%);
+  }
+  15% {
+    transform: translateY(-10%);
+    animation-timing-function: ease-out;
+  }
+
+  20% {
+    transform: translateY(0);
+  }
+
+  40%,
+  100% {
+    transform: translateY(-110%);
+  }
+}
+
+.animate-word {
+  animation: word 7s infinite;
+}
+.animate-word-delay-1 {
+  animation: word 7s infinite;
+  animation-delay: -1.75s;
+}
+.animate-word-delay-2 {
+  animation: word 7s infinite;
+  animation-delay: -3.5s;
+}
+.animate-word-delay-3 {
+  animation: word 7s infinite;
+  animation-delay: -5.25s;
+}
+
+/* --- New Animate Horizontal --- */
+@keyframes horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(10px); /* Adjust this value for desired movement */
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-horizontal {
+  animation: horizontal 1s ease-in-out infinite; /* Adjust duration and timing as needed */
 }
