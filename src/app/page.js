@@ -15,16 +15,13 @@ import {
 import Video from "@/components/Video"; // Adjust path as necessary
 import LogoAnimation from "@/components/LogoAnimation"; // Adjust path as necessary
 import PageTemplate from "@/components/PageTemplate"; // Adjust path as necessary
-import {
-  Disclosure,
-  DisclosureButton,
-  DisclosurePanel,
-} from "@headlessui/react";
 import AnimatedWords from "@/components/AnimatedWords"; // Adjust path as necessary
 import { CheckCircleIcon } from "@heroicons/react/20/solid";
 import ImageCarousel from "@/components/ImageCarousel"; // Adjust path as necessary
 import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline";
 import Testimonials from "@/components/Testimonials"; // Adjust path as necessary
+
+import FAQ from "@/components/FAQ";
 
 const actions = [
   {
@@ -81,40 +78,6 @@ const actions = [
     description:
       "As certified Duo Deployment Partners, we provide robust security with Duo’s Multi-Factor Authentication (MFA), device health checks, adaptive authentication, and secure SSO. Duo helps ensure compliance with detailed reporting and offers competitive pricing for small to medium-sized businesses.",
   },
-];
-
-const faqs = [
-  {
-    id: 1,
-    question: "Is this company a subsidiary of Call-a-Tek?",
-    answer:
-      "Yes, we are a subsidiary of Call-a-Tek, and our operations are managed by the same CEO.",
-  },
-  {
-    id: 2,
-    question: "What type of services do you offer?",
-    answer:
-      "We offer a wide range of services, including IT Department Help Desk support, secure SFTP solutions, phishing tests, managed VoIP, and cybersecurity services, all tailored to meet your specific business needs.",
-  },
-  {
-    id: 3,
-    question: "Do you provide ongoing IT support?",
-    answer:
-      "Yes, we provide continuous IT support with 24/7 access to our help desk and experts who are ready to assist with any IT or cybersecurity concerns.",
-  },
-  {
-    id: 4,
-    question: "How do I get started with your services?",
-    answer:
-      "Getting started is easy! Reach out to us, and we'll schedule a consultation to understand your needs. From there, we’ll customize a service package and provide pricing details tailored to your business.",
-  },
-  {
-    id: 5,
-    question: "What industries do you serve?",
-    answer:
-      "We serve businesses across various industries, including healthcare, finance, education, and retail, with a focus on security and reliability in every sector.",
-  },
-  // Add more questions as needed...
 ];
 
 const benefits = [
@@ -426,42 +389,7 @@ export default function Home() {
       </div>
 
       {/* FAQs */}
-      <div
-        id="faqs"
-        className="mx-auto max-w-2xl divide-y divide-gray-900/10 px-6 pb-8 sm:pb-24 sm:pt-12 lg:max-w-7xl lg:px-8 lg:pb-32"
-      >
-        <h2 className="text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
-          Frequently asked questions
-        </h2>
-        <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
-          {faqs.map((faq) => (
-            <Disclosure key={faq.question} as="div" className="pt-6">
-              <dt>
-                <DisclosureButton className="group flex w-full items-start justify-between text-left text-gray-900">
-                  <span className="text-base/7 font-semibold">
-                    {faq.question}
-                  </span>
-                  <span className="ml-6 flex h-7 items-center">
-                    {/* Default + icon */}
-                    <PlusSmallIcon
-                      aria-hidden="true"
-                      className="size-6 group-data-[open]:hidden"
-                    />
-                    {/* Default - icon */}
-                    <MinusSmallIcon
-                      aria-hidden="true"
-                      className="size-6 group-[&:not([data-open])]:hidden"
-                    />
-                  </span>
-                </DisclosureButton>
-              </dt>
-              <DisclosurePanel as="dd" className="mt-2 pr-12">
-                <p className="text-base/7 text-gray-600">{faq.answer}</p>
-              </DisclosurePanel>
-            </Disclosure>
-          ))}
-        </dl>
-      </div>
+      <FAQ />
     </PageTemplate>
   );
 }
