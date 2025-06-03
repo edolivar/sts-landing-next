@@ -1,6 +1,5 @@
 'use client';
 
-import Head from 'next/head';
 import Image from 'next/image';
 import PageTemplate from '@/components/PageTemplate'; // Assuming PageTemplate is in your components directory
 import {
@@ -41,13 +40,6 @@ const features = [
 export default function TicketInfo() {
   return (
     <PageTemplate>
-      <Head>
-        <title>STS - Ticket</title>
-        <meta
-          name="description"
-          content="Get support with Secure Tech Solutions’ ticketing system. Submit, track, and manage your IT and cybersecurity service requests efficiently for fast resolution."
-        />
-      </Head>
       <div className="overflow-hidden bg-white py-14 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">

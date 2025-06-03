@@ -1,5 +1,4 @@
 'use client'
-import Head from 'next/head';
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import PageTemplate from '@/components/PageTemplate'; // Adjust path if needed
@@ -81,14 +80,6 @@ const PrivacyPolicyPage = () => {
 
   return (
     <PageTemplate>
-      <Head>
-        <title>STS - Privacy</title>
-        <meta
-          name="description"
-          content="Read Secure Tech Solutions' Privacy Policy to learn how we collect, use, and protect your personal information when you visit our website or use our services."
-        />
-      </Head>
-
       <div className="w-full pt-32 pb-32 mb-16 bg-gradient-to-r from-[#e8f5e9] via-[#e3f2fd] to-[#e1f5fe]">
         <div className="max-w-4xl mx-auto px-8">
           <div className="text-sm text-gray-600 mb-4">

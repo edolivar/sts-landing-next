@@ -1,5 +1,4 @@
 'use client'
-import Head from 'next/head';
 import PageTemplate from "@/components/PageTemplate";
 import Contact from '@/components/Contact';
 // ... rest of your component
@@ -54,10 +53,6 @@ const values = [
 export default function About() {
   return (
     <PageTemplate>
-      <Head>
-        <title>STS - About</title>
-        <meta name="description" content="Learn about Secure Tech Solutions—our mission, team, and commitment to helping businesses defend against cyber threats through expert-led phishing simulations and security training." />
-      </Head>
       <div className="relative isolate -z-10">
         <svg
           aria-hidden="true"

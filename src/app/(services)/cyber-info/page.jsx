@@ -7,19 +7,10 @@ import {
   ShieldCheckIcon,
 } from '@heroicons/react/24/outline';
 
-import Head from 'next/head';
 import PageTemplate from '@/components/PageTemplate'; // Assuming PageTemplate is in your components directory
-
 export default function CyberInfo() {
   return (
     <PageTemplate>
-      <Head>
-        <title>STS - CyberInfo</title>
-        <meta
-          name="description"
-          content="Explore Secure Tech Solutions' cybersecurity services, including phishing simulations, threat mitigation strategies, and employee training to protect your business from cyberattacks."
-        />
-      </Head>
 
       <div className="relative isolate overflow-hidden bg-white py-14 sm:py-24">
         <div

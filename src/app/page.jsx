@@ -114,13 +114,6 @@ export default function Home() {
 
   return (
     <PageTemplate>
-      <Head>
-        <title>STS - Home</title>
-        <meta
-          name="description"
-          content="Secure Tech Solutions helps businesses strengthen cybersecurity with realistic phishing simulations, security awareness training, and expert consulting tailored to your organization’s needs."
-        />
-      </Head>
       <div className="mx-auto w-full px-8 lg:px-12">
         <div className="pt-5">
           <AnimatedWords />

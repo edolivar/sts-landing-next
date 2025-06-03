@@ -6,7 +6,6 @@ import {
   FlagIcon,
   ShieldCheckIcon,
 } from '@heroicons/react/24/outline';
-import Head from 'next/head';
 import PageTemplate from '@/components/PageTemplate'; // Assuming PageTemplate is in your components directory
 
 const features = [
@@ -39,13 +38,6 @@ const features = [
 export default function MFAInfo() {
   return (
     <PageTemplate>
-      <Head>
-        <title>STS - MFA</title>
-        <meta
-          name="description"
-          content="Learn how Secure Tech Solutions helps businesses implement multi-factor authentication (MFA) to strengthen account security, prevent unauthorized access, and meet compliance requirements."
-        />
-      </Head>
 
       <div className="bg-white py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">

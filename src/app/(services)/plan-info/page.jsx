@@ -18,7 +18,6 @@ import {
   CalendarDaysIcon,
   ComputerDesktopIcon,
 } from '@heroicons/react/24/outline';
-import Head from 'next/head';
 import PageTemplate from '@/components/PageTemplate'; // Assuming PageTemplate is in your components directory
 
 const solutions = [
@@ -145,13 +144,6 @@ const features = [
 export default function PlanningInfo() {
   return (
     <PageTemplate>
-      <Head>
-        <title>STS - Planning</title>
-        <meta
-          name="description"
-          content="Compare Secure Tech Solutions' service plans to find the right cybersecurity and IT support package for your business. Flexible options designed to meet your security and budget needs."
-        />
-      </Head>
 
       <div className="bg-white py-8 sm:py-12">
         <div className="mb-8 mx-auto max-w-7xl px-6 lg:px-8">

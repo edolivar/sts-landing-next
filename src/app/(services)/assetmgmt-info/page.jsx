@@ -1,7 +1,6 @@
 'use client';
 
 import { DocumentTextIcon, LockClosedIcon } from '@heroicons/react/24/outline';
-import Head from 'next/head';
 import Image from 'next/image';
 import PageTemplate from '@/components/PageTemplate'; // Assuming PageTemplate is in your components directory
 
@@ -23,13 +22,6 @@ const features = [
 export default function AssetManagementInfo() {
   return (
     <PageTemplate>
-      <Head>
-        <title>STS - Asset</title>
-        <meta
-          name="description"
-          content="Discover how Secure Tech Solutions streamlines IT asset management with secure, organized tracking of hardware, software, and licensing to enhance visibility and reduce risk."
-        />
-      </Head>
       <div className="overflow-hidden bg-white py-14 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">

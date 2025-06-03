@@ -1,5 +1,4 @@
 'use client'
-import Head from 'next/head';
 import Image from 'next/image';
 import PageTemplate from '@/components/PageTemplate'; // Assuming PageTemplate is in your components directory
 import {
@@ -53,13 +52,6 @@ const features = [
 export default function SFTPInfo() {
   return (
     <PageTemplate>
-      <Head>
-        <title>STS - SFTP</title>
-        <meta
-          name="description"
-          content="Learn how Secure Tech Solutions provides secure, encrypted SFTP services for safely transferring sensitive files and ensuring compliance with industry data protection standards."
-        />
-      </Head>
       <div className="overflow-hidden bg-white py-14 sm:py-24">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">

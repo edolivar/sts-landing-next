@@ -1,19 +1,11 @@
 'use client';
 
-import Head from 'next/head';
 import ScrollToTopLink from '@/components/ScrollLink'; // Ensure the path to ScrollToTopLink is correct
 import PageTemplate from '@/components/PageTemplate'; // Assuming PageTemplate is in your components directory
 
 export default function ManagedInfo() {
   return (
     <PageTemplate>
-      <Head>
-        <title>STS - ManagedIT</title>
-        <meta
-          name="description"
-          content="Secure Tech Solutions offers reliable managed IT services, including proactive monitoring, system maintenance, and cybersecurity support to keep your business running securely and efficiently."
-        />
-      </Head>
       <div className="bg-white ">
         <div className="mx-auto py-9 max-w-5xl text-left px-6 lg:px-8">
           <h2 className="mt-2 text-6xl font-semibold tracking-tight text-gray-900 sm:text-5xl">
