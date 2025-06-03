@@ -1,18 +1,19 @@
-import { Link } from "react-router-dom";
+'use client';
 
-const ScrollToTopLink = ({ to, children, className = "" }) => {
-  const handleScrollToTop = () => {
-    window.scrollTo(0, 0); // Scrolls to the top of the page
+import { useRouter } from 'next/navigation';
+
+const ScrollToTopLink = ({ to, children, className = '' }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' }); // Smooth scroll to top
+    router.push(to); // Navigate to the new route
   };
 
   return (
-    <Link
-      to={to}
-      className={`text-sm/6 font-semibold text-gray-900 hover:text-stsLight ${className}`}
-      onClick={handleScrollToTop} // Trigger scroll to top on click
-    >
+    <button onClick={handleClick} className={className}>
       {children}
-    </Link>
+    </button>
   );
 };
 

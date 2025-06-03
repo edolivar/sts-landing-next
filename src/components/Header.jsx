@@ -1,10 +1,9 @@
 "use client"; // Important for client-side hooks like useState, useRouter
 
 import { useState } from "react";
-import Link from "next/link"; // Replaced 'react-router-dom' Link
-import { useRouter } from "next/navigation"; // Replaced 'react-router-dom' useNavigate and useLocation
-import PropTypes from "prop-types"; // Keep PropTypes if you use it for type checking
-
+import Link from "next/link";
+import { useRouter, usePathname } from "next/navigation";
+import PropTypes from "prop-types";
 import {
   Dialog,
   DialogPanel,
@@ -16,7 +15,6 @@ import {
   PopoverGroup,
   PopoverPanel,
 } from "@headlessui/react";
-
 import {
   Bars3Icon,
   CursorArrowRaysIcon,
@@ -26,7 +24,6 @@ import {
   CubeTransparentIcon,
   ServerStackIcon,
 } from "@heroicons/react/24/outline";
-
 import {
   ChevronDownIcon,
   QuestionMarkCircleIcon,
@@ -66,67 +63,58 @@ const services = [
   },
 ];
 
-const callsToAction = [
+const callsToActionConfig = [
   {
     name: "FAQs",
-    href: "/#faqs", // Changed to full path to home page with hash
+    href: "/#faqs",
     icon: QuestionMarkCircleIcon,
-    // Next.js Link handles scrolling to hash if on the same page.
-    // For navigation to another page AND then scrolling, useRouter is needed.
-    action: (router) => {
-      // If current path is already '/', just scroll
-      if (router.pathname === "/") {
-        document.querySelector("#faqs")?.scrollIntoView({ behavior: "smooth" });
-      } else {
-        // Navigate to home and then scroll
-        router.push("/#faqs").then(() => {
-          // Next.js Link will handle scrolling to hash after navigation if it's within the same page
-          // If the page doesn't exist yet, this needs to be after the navigation
-          // A small timeout might still be needed in some cases for content to render.
-          setTimeout(() => {
-            document.querySelector("#faqs")?.scrollIntoView({ behavior: "smooth" });
-          }, 0); // Use 0 or small timeout to defer execution
-        });
-      }
-    },
   },
   {
     name: "Contact us",
-    href: "mailto:info@stsit.biz", // Mailto links are handled directly by <a>
+    href: "mailto:info@stsit.biz",
     icon: EnvelopeIcon,
-    action: () => {
-      // This action is fine as it uses native browser functionality
-      window.location.href = "mailto:info@stsit.biz";
-    },
   },
 ];
 
 export default function Header({ styles }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const router = useRouter(); // Use Next.js useRouter hook
+  const router = useRouter();
+  const pathname = usePathname();
 
-  // Helper function to close mobile menu and navigate
+  const handleScrollToFAQs = () => {
+    if (pathname === "/") {
+      document.querySelector("#faqs")?.scrollIntoView({ behavior: "smooth" });
+    } else {
+      router.push("/?scrollToFAQs=true");
+    }
+  };
+
+  const handleContactUs = () => {
+    window.location.href = "mailto:info@stsit.biz";
+  };
+
+  const callsToAction = callsToActionConfig.map((item) => ({
+    ...item,
+    action: item.name === "FAQs" ? handleScrollToFAQs : handleContactUs,
+  }));
+
   const handleNavigation = (href) => {
-    setMobileMenuOpen(false); // Close mobile menu first
+    setMobileMenuOpen(false);
     if (href.startsWith("http") || href.startsWith("mailto:")) {
-      window.open(href, "_blank"); // Open external links in new tab
+      window.open(href, "_blank");
     } else if (href.startsWith("/#")) {
-      // Special handling for hash links that might navigate between pages
       const [path, hash] = href.split("#");
-      if (router.pathname === path) {
-        // If on the same page, just scroll
+      const scrollToElement = () => {
         document.querySelector(`#${hash}`)?.scrollIntoView({ behavior: "smooth" });
+      };
+
+      if (pathname === path) {
+        scrollToElement();
       } else {
-        // Navigate to the page and then scroll
-        router.push(href).then(() => {
-          // Next.js Link might handle this, but adding a fallback
-          setTimeout(() => {
-            document.querySelector(`#${hash}`)?.scrollIntoView({ behavior: "smooth" });
-          }, 0); // Short delay to ensure DOM is ready
-        });
+        router.push(path).then(scrollToElement);
       }
     } else {
-      router.push(href); // Use router.push for internal Next.js pages
+      router.push(href);
     }
   };
 
@@ -137,10 +125,8 @@ export default function Header({ styles }) {
         className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8"
       >
         <div className="flex lg:flex-1">
-          {/* Use Next.js Link for internal navigation */}
           <Link href="/" className="mr-5 p-1" onClick={() => setMobileMenuOpen(false)}>
             <span className="sr-only">Secure Tech Solutions</span>
-            {/* Use standard img for static assets in public folder */}
             <img alt="Secure Tech Solutions Logo" src="/sts_cat_icon.svg" className="h-24 w-auto" />
           </Link>
         </div>
@@ -178,7 +164,6 @@ export default function Header({ styles }) {
                       />
                     </div>
                     <div className="flex-auto">
-                      {/* Use Next.js Link for internal navigation */}
                       <Link
                         href={item.href}
                         className="block font-semibold text-gray-900"
@@ -195,8 +180,7 @@ export default function Header({ styles }) {
                 {callsToAction.map((item) => (
                   <button
                     key={item.name}
-                    // For callsToAction, use the action function, passing router if needed
-                    onClick={() => item.action(router)}
+                    onClick={item.action}
                     className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100 group"
                   >
                     <item.icon
@@ -210,11 +194,9 @@ export default function Header({ styles }) {
             </PopoverPanel>
           </Popover>
 
-          {/* Use Next.js Link for internal navigation */}
           <Link href="/about" className="text-base font-semibold text-stsDark hover:text-stsLight">
             About STS
           </Link>
-          {/* External links remain standard <a> tags with target="_blank" and rel="noopener noreferrer" for security */}
           <a
             href="https://ticket.securetechsolutions.biz/"
             target="_blank"
@@ -257,10 +239,8 @@ export default function Header({ styles }) {
       >
         <DialogPanel className="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
           <div className="flex items-center justify-between">
-            {/* Use Next.js Link for internal navigation */}
             <Link href="/" className="-m-1.5 p-1.5" onClick={() => setMobileMenuOpen(false)}>
               <span className="sr-only">Secure Tech Solutions</span>
-              {/* Use standard img for static assets in public folder */}
               <img alt="Secure Tech Solutions Favicon" src="/sts_favicon.svg" className="h-8 w-auto" />
             </Link>
             <button
@@ -287,7 +267,7 @@ export default function Header({ styles }) {
                     {services.map((item) => (
                       <button
                         key={item.name}
-                        onClick={() => handleNavigation(item.href)} // Use the helper
+                        onClick={() => handleNavigation(item.href)}
                         className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 group"
                       >
                         <item.icon
@@ -301,8 +281,8 @@ export default function Header({ styles }) {
                       <button
                         key={item.name}
                         onClick={() => {
-                          setMobileMenuOpen(false); // Close menu before acting
-                          item.action(router); // Pass router to action
+                          setMobileMenuOpen(false);
+                          item.action();
                         }}
                         className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 group"
                       >
@@ -315,15 +295,13 @@ export default function Header({ styles }) {
                     ))}
                   </DisclosurePanel>
                 </Disclosure>
-                {/* Use Next.js Link for internal navigation */}
                 <Link
                   href="/about"
-                  onClick={() => setMobileMenuOpen(false)} // Close menu on click
+                  onClick={() => setMobileMenuOpen(false)}
                   className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
                   About STS
                 </Link>
-                {/* External links remain standard <a> tags with target="_blank" and rel="noopener noreferrer" for security */}
                 <a
                   href="https://ticket.securetechsolutions.biz/"
                   target="_blank"
