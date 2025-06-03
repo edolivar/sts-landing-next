@@ -1,7 +1,7 @@
 import "@/app/globals.css";
 
 export const metadata = {
-  title: "STS - Privacy Policy",
+  title: "STSIT - Privacy Policy",
   description: "Read Secure Tech Solutions' Privacy Policy to learn how we collect, use, and protect your personal information when you visit our website or use our services.",
 };
 

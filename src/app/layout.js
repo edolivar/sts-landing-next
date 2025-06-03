@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 import './globals.css';
 
 export const metadata = {
-  title: 'STSIT - Home',
+  title: 'STSITIT - Home',
   description: 'Expert cybersecurity solutions for businesses.',
 };
 

@@ -1,7 +1,7 @@
 import "@/app/globals.css";
 
 export const metadata = {
-  title: "STS - CyberSecurity",
+  title: "STSIT - CyberSecurity",
   description: "Explore Secure Tech Solutions' cybersecurity services, including phishing simulations, threat mitigation strategies, and employee training to protect your business from cyberattacks.",
 };
 

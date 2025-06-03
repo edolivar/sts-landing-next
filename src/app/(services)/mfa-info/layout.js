@@ -1,7 +1,7 @@
 import "@/app/globals.css";
 
 export const metadata = {
-  title: "STS - MFA",
+  title: "STSIT - MFA",
   description: "Learn how Secure Tech Solutions helps businesses implement multi-factor authentication (MFA) to strengthen account security, prevent unauthorized access, and meet compliance requirements.",
 };
 
