@@ -63,20 +63,21 @@ const services = [
   },
 ];
 
-
 export default function Header({ styles }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
   const handleScrollToFAQs = () => {
+    // This timeout ensures the routing and rendering have a moment to complete
+    // before attempting to scroll, which can be useful when navigating to a new page
+    // and then scrolling to an anchor on that page.
     setTimeout(() => {
       document.getElementById("faqs") &&
         document
           .getElementById("faqs")
           .scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 1000)
-
+    }, 1000); // Increased timeout for robustness, adjust if needed
   };
 
   const handleContactUs = () => {
@@ -84,7 +85,7 @@ export default function Header({ styles }) {
   };
 
   const handleNavigation = (href) => {
-    setMobileMenuOpen(false);
+    setMobileMenuOpen(false); // Close mobile menu on navigation
     if (href.startsWith("http") || href.startsWith("mailto:")) {
       window.open(href, "_blank");
     } else if (href.startsWith("/#")) {
@@ -127,68 +128,77 @@ export default function Header({ styles }) {
         </div>
         <PopoverGroup className="hidden lg:flex lg:gap-x-12">
           <Popover className="relative">
-            <PopoverButton className="flex items-center gap-x-1 pl-1 text-lg font-semibold text-stsDark hover:text-stsLight">
-              Services
-              <ChevronDownIcon
-                aria-hidden="true"
-                className="size-5 flex-none text-gray-400"
-              />
-            </PopoverButton>
+            {({ close }) => (
+              <>
+                <PopoverButton className="flex items-center gap-x-1 pl-1 text-lg font-semibold text-stsDark hover:text-stsLight">
+                  Services
+                  <ChevronDownIcon
+                    aria-hidden="true"
+                    className="size-5 flex-none text-gray-400"
+                  />
+                </PopoverButton>
 
-            <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
-              <div className="p-4">
-                {services.map((item) => (
-                  <div
-                    key={item.name}
-                    className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50"
-                  >
-                    <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
-                      <item.icon
-                        aria-hidden="true"
-                        className="size-6 text-gray-600 group-hover:text-stsLight"
-                      />
-                    </div>
-                    <div className="flex-auto">
-                      <Link
-                        href={item.href}
-                        className="block font-semibold text-gray-900"
+                <PopoverPanel className="absolute -left-8 top-full z-10 mt-3 w-screen max-w-md overflow-hidden rounded-3xl bg-white shadow-lg ring-1 ring-gray-900/5">
+                  <div className="p-4">
+                    {services.map((item) => (
+                      <div
+                        key={item.name}
+                        className="group relative flex items-center gap-x-6 rounded-lg p-4 text-sm/6 hover:bg-gray-50"
                       >
-                        {item.name}
-                        <span className="absolute inset-0" />
-                      </Link>
-                      <p className="mt-1 text-gray-600">{item.description}</p>
-                    </div>
+                        <div className="flex size-11 flex-none items-center justify-center rounded-lg bg-gray-50 group-hover:bg-white">
+                          <item.icon
+                            aria-hidden="true"
+                            className="size-6 text-gray-600 group-hover:text-stsLight"
+                          />
+                        </div>
+                        <div className="flex-auto">
+                          <Link
+                            href={item.href}
+                            className="block font-semibold text-gray-900"
+                            onClick={() => close()}
+                          >
+                            {item.name}
+                            <span className="absolute inset-0" />
+                          </Link>
+                          <p className="mt-1 text-gray-600">{item.description}</p>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
-              <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                <Link
-                  href={'/'}
-                  onClick={
-                    handleScrollToFAQs
-                  }
-                  className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100 group"
-                >
-                  <QuestionMarkCircleIcon
-                    aria-hidden="true"
-                    className="size-5 flex-none text-gray-400 group-hover:text-stsLight"
-                  />
-                  {'FAQs'}
-                </Link>
+                  <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
+                    <Link
+                      href={'/'}
+                      onClick={() => {
+                        handleScrollToFAQs();
+                        close(); // Closes popover when FAQs link is clicked
+                      }}
+                      className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100 group"
+                    >
+                      <QuestionMarkCircleIcon
+                        aria-hidden="true"
+                        className="size-5 flex-none text-gray-400 group-hover:text-stsLight"
+                      />
+                      {"FAQs"}
+                    </Link>
 
-                <button
-                  key={'Contact Us'}
-                  onClick={handleContactUs}
-                  className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100 group"
-                >
-                  <EnvelopeIcon
-                    aria-hidden="true"
-                    className="size-5 flex-none text-gray-400 group-hover:text-stsLight"
-                  />
-                  {'Contact Us'}
-                </button>
-              </div>
-            </PopoverPanel>
+                    <button
+                      key={'Contact Us'}
+                      onClick={() => {
+                        handleContactUs();
+                        close(); // Closes popover when Contact Us is clicked
+                      }}
+                      className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100 group"
+                    >
+                      <EnvelopeIcon
+                        aria-hidden="true"
+                        className="size-5 flex-none text-gray-400 group-hover:text-stsLight"
+                      />
+                      {"Contact Us"}
+                    </button>
+                  </div>
+                </PopoverPanel>
+              </>
+            )}
           </Popover>
 
           <Link href="/about" className="text-base font-semibold text-stsDark hover:text-stsLight">
@@ -321,10 +331,10 @@ export default function Header({ styles }) {
                 </a>
                 <div className="grid grid-cols-2 divide-x divide-gray-900/5 ">
                   <Link
-                    href={'/'}
+                    href={"/"}
                     onClick={() => {
-                      setMobileMenuOpen(false);
-                      handleScrollToFAQs()
+                      setMobileMenuOpen(false); // Closes mobile menu
+                      handleScrollToFAQs();
                     }}
                     className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 group"
                   >
@@ -337,8 +347,8 @@ export default function Header({ styles }) {
                   <button
                     key={'Contact Us'}
                     onClick={() => {
-                      setMobileMenuOpen(false);
-                      item.action();
+                      setMobileMenuOpen(false); // Closes mobile menu
+                      handleContactUs(); // Calls the contact us function
                     }}
                     className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 group"
                   >
@@ -349,7 +359,6 @@ export default function Header({ styles }) {
                     {"Contact Us"}
                   </button>
                 </div>
-
               </div>
             </div>
           </div>
