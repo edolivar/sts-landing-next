@@ -63,18 +63,6 @@ const services = [
   },
 ];
 
-const callsToActionConfig = [
-  {
-    name: "FAQs",
-    href: "/#faqs",
-    icon: QuestionMarkCircleIcon,
-  },
-  {
-    name: "Contact us",
-    href: "mailto:info@stsit.biz",
-    icon: EnvelopeIcon,
-  },
-];
 
 export default function Header({ styles }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -82,21 +70,18 @@ export default function Header({ styles }) {
   const pathname = usePathname();
 
   const handleScrollToFAQs = () => {
-    if (pathname === "/") {
-      document.querySelector("#faqs")?.scrollIntoView({ behavior: "smooth" });
-    } else {
-      router.push("/?scrollToFAQs=true");
-    }
+    setTimeout(() => {
+      document.getElementById("faqs") &&
+        document
+          .getElementById("faqs")
+          .scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 1000)
+
   };
 
   const handleContactUs = () => {
     window.location.href = "mailto:info@stsit.biz";
   };
-
-  const callsToAction = callsToActionConfig.map((item) => ({
-    ...item,
-    action: item.name === "FAQs" ? handleScrollToFAQs : handleContactUs,
-  }));
 
   const handleNavigation = (href) => {
     setMobileMenuOpen(false);
@@ -177,19 +162,31 @@ export default function Header({ styles }) {
                 ))}
               </div>
               <div className="grid grid-cols-2 divide-x divide-gray-900/5 bg-gray-50">
-                {callsToAction.map((item) => (
-                  <button
-                    key={item.name}
-                    onClick={item.action}
-                    className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100 group"
-                  >
-                    <item.icon
-                      aria-hidden="true"
-                      className="size-5 flex-none text-gray-400 group-hover:text-stsLight"
-                    />
-                    {item.name}
-                  </button>
-                ))}
+                <Link
+                  href={'/'}
+                  onClick={
+                    handleScrollToFAQs
+                  }
+                  className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100 group"
+                >
+                  <QuestionMarkCircleIcon
+                    aria-hidden="true"
+                    className="size-5 flex-none text-gray-400 group-hover:text-stsLight"
+                  />
+                  {'FAQs'}
+                </Link>
+
+                <button
+                  key={'Contact Us'}
+                  onClick={handleContactUs}
+                  className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 hover:bg-gray-100 group"
+                >
+                  <EnvelopeIcon
+                    aria-hidden="true"
+                    className="size-5 flex-none text-gray-400 group-hover:text-stsLight"
+                  />
+                  {'Contact Us'}
+                </button>
               </div>
             </PopoverPanel>
           </Popover>
@@ -277,22 +274,6 @@ export default function Header({ styles }) {
                         {item.name}
                       </button>
                     ))}
-                    {callsToAction.map((item) => (
-                      <button
-                        key={item.name}
-                        onClick={() => {
-                          setMobileMenuOpen(false);
-                          item.action();
-                        }}
-                        className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 group"
-                      >
-                        <item.icon
-                          aria-hidden="true"
-                          className="size-5 flex-none text-gray-400 group-hover:text-stsLight"
-                        />
-                        {item.name}
-                      </button>
-                    ))}
                   </DisclosurePanel>
                 </Disclosure>
                 <Link
@@ -338,6 +319,37 @@ export default function Header({ styles }) {
                 >
                   Remote Desktop
                 </a>
+                <div className="grid grid-cols-2 divide-x divide-gray-900/5 ">
+                  <Link
+                    href={'/'}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      handleScrollToFAQs()
+                    }}
+                    className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 group"
+                  >
+                    <QuestionMarkCircleIcon
+                      aria-hidden="true"
+                      className="size-5 flex-none text-gray-400 group-hover:text-stsLight"
+                    />
+                    {"FAQs"}
+                  </Link>
+                  <button
+                    key={'Contact Us'}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      item.action();
+                    }}
+                    className="flex items-center justify-center gap-x-2.5 p-3 text-sm/6 font-semibold text-gray-900 group"
+                  >
+                    <EnvelopeIcon
+                      aria-hidden="true"
+                      className="size-5 flex-none text-gray-400 group-hover:text-stsLight"
+                    />
+                    {"Contact Us"}
+                  </button>
+                </div>
+
               </div>
             </div>
           </div>

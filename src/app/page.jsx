@@ -2,8 +2,6 @@
 
 import Head from "next/head"; // Changed from react-helmet
 import Link from "next/link"; // New import for Next.js Link
-import { useSearchParams } from "next/navigation"; // Import useRouter from 'next/router' for Pages Router
-import { useEffect } from "react";
 
 import {
   ArrowPathIcon,
@@ -95,22 +93,7 @@ function classNames(...classes) {
 }
 
 export default function Home() {
-  const searchParams = useSearchParams()
-  const scollBool = searchParams.get('scrollToFAQs')
 
-  useEffect(() => {
-    if (scollBool === 'true') {
-      const faqsElement = document.querySelector("#faqs");
-      if (faqsElement) {
-        faqsElement.scrollIntoView({ behavior: "smooth" });
-
-        // Safely remove the query param without navigation
-        const url = new URL(window.location.href);
-        url.searchParams.delete('scrollToFAQs');
-        window.history.replaceState({}, '', url.toString());
-      }
-    }
-  }, [scollBool])
 
   return (
     <PageTemplate>
