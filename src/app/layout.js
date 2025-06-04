@@ -44,7 +44,7 @@ export const metadata = {
   openGraph: {
     title: 'STSIT - Managed IT Services',
     description: 'Comprehensive Managed IT Solutions to meet your Business Needs—Network, Cybersecurity, and Support All in One Place.',
-    url: 'https://securetechsolutions.biz',
+    url: 'https://stsit.biz',
     type: 'website',
     images: [{
       url: 'https://stsit.biz/sts_logo.jpg',
