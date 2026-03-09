@@ -221,7 +221,7 @@ export default function Header({ styles }) {
             SFTP Portal
           </a>
           <a
-            href="https://sts-elearning.com/"
+            href="https://sts-lms.com/dashboard/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-base font-semibold text-stsDark hover:text-stsLight"
